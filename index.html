@@ -1,571 +1,1042 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Seven | Personal Website</title>
+<title>SEVEN — Beyond the Ordinary</title>
 
-    <meta name="description" content="Website pribadi Seven — belajar, membuat, dan menjelajahi dunia teknologi.">
+<meta name="description" content="Seven — curiosity, science, technology and ideas.">
 
-    <style>
-        /* =========================
-           RESET
-        ========================== */
+<style>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+/* =========================================================
+   RESET
+========================================================= */
 
-        html {
-            scroll-behavior: smooth;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #080808;
-            color: #f5f5f5;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+body {
+    background: #050505;
+    color: #f5f5f5;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
 
-        /* =========================
-           BACKGROUND
-        ========================== */
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background:
-                radial-gradient(
-                    circle at 20% 20%,
-                    rgba(255, 0, 0, 0.12),
-                    transparent 30%
-                ),
-                radial-gradient(
-                    circle at 80% 80%,
-                    rgba(255, 0, 0, 0.08),
-                    transparent 30%
-                );
-            pointer-events: none;
-            z-index: -1;
-        }
 
-        /* =========================
-           NAVBAR
-        ========================== */
+/* =========================================================
+   CUSTOM CURSOR GLOW
+========================================================= */
 
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(8, 8, 8, 0.75);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            z-index: 1000;
-        }
+.cursor-glow {
+    position: fixed;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: rgba(255, 0, 0, 0.08);
+    filter: blur(60px);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 900;
-            letter-spacing: 3px;
-        }
 
-        .logo span {
-            color: #ff2b2b;
-        }
+/* =========================================================
+   GRID BACKGROUND
+========================================================= */
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 30px;
-        }
+.grid {
+    position: fixed;
+    inset: 0;
 
-        nav a {
-            color: #aaa;
-            transition: 0.3s;
-        }
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,0.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.025) 1px,
+            transparent 1px
+        );
 
-        nav a:hover {
-            color: #ff3030;
-        }
+    background-size: 50px 50px;
 
-        /* =========================
-           HERO
-        ========================== */
+    mask-image: linear-gradient(
+        to bottom,
+        black,
+        transparent 85%
+    );
 
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 120px 8% 80px;
-            position: relative;
-        }
+    pointer-events: none;
+    z-index: -2;
+}
 
-        .hero-content {
-            max-width: 850px;
-        }
 
-        .tag {
-            display: inline-block;
-            color: #ff3838;
-            border: 1px solid rgba(255, 56, 56, 0.4);
-            padding: 7px 14px;
-            border-radius: 50px;
-            margin-bottom: 25px;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-        }
+/* =========================================================
+   RED ATMOSPHERE
+========================================================= */
 
-        h1 {
-            font-size: clamp(3rem, 9vw, 7rem);
-            line-height: 0.95;
-            letter-spacing: -5px;
-            margin-bottom: 30px;
-        }
+.atmosphere {
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    background: rgba(255, 0, 0, 0.07);
+    filter: blur(150px);
+    border-radius: 50%;
+    top: -250px;
+    right: -200px;
+    z-index: -3;
+}
 
-        h1 span {
-            color: #ff2929;
-        }
 
-        .hero p {
-            max-width: 650px;
-            color: #aaa;
-            font-size: 1.1rem;
-            margin-bottom: 35px;
-        }
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
-        .buttons {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 25px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-        .btn {
-            padding: 13px 24px;
-            border-radius: 8px;
-            border: 1px solid #333;
-            transition: 0.3s;
-            cursor: pointer;
-            font-weight: bold;
-        }
+    background: rgba(5,5,5,0.65);
+    backdrop-filter: blur(15px);
 
-        .btn-primary {
-            background: #ff2525;
-            border-color: #ff2525;
-            color: white;
-        }
+    border-bottom: 1px solid rgba(255,255,255,0.06);
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 30, 30, 0.25);
-        }
+    z-index: 1000;
+}
 
-        .btn-secondary {
-            color: #ccc;
-        }
+.logo {
+    font-weight: 900;
+    font-size: 1.4rem;
+    letter-spacing: 5px;
+}
 
-        .btn-secondary:hover {
-            border-color: #ff2525;
-            color: #ff2525;
-        }
+.logo span {
+    color: #ff2020;
+}
 
-        /* =========================
-           SECTIONS
-        ========================== */
+.nav-links {
+    display: flex;
+    gap: 35px;
+}
 
-        section {
-            padding: 100px 8%;
-        }
+.nav-links a {
+    color: #888;
+    font-size: 0.85rem;
+    transition: 0.3s;
+}
 
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
+.nav-links a:hover {
+    color: #ff2020;
+}
 
-        .section-description {
-            color: #888;
-            max-width: 650px;
-            margin-bottom: 50px;
-        }
 
-        /* =========================
-           CARDS
-        ========================== */
+/* =========================================================
+   HERO
+========================================================= */
 
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
+.hero {
+    min-height: 100vh;
 
-        .card {
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.035);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 15px;
-            transition: 0.3s;
-        }
+    display: flex;
+    align-items: center;
 
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255, 40, 40, 0.5);
-            background: rgba(255, 40, 40, 0.04);
-        }
+    padding: 140px 7% 100px;
 
-        .card-number {
-            color: #ff3030;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-        }
+    position: relative;
+}
 
-        .card h3 {
-            margin-bottom: 12px;
-            font-size: 1.4rem;
-        }
+.hero-content {
+    max-width: 1000px;
+}
 
-        .card p {
-            color: #888;
-        }
+.small-title {
+    color: #ff2525;
+    font-size: 0.75rem;
+    letter-spacing: 5px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
 
-        /* =========================
-           ABOUT
-        ========================== */
+.hero h1 {
+    font-size: clamp(4rem, 13vw, 11rem);
 
-        .about {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 70px;
-            align-items: center;
-        }
+    line-height: 0.82;
 
-        .quote {
-            font-size: clamp(2rem, 4vw, 4rem);
-            font-weight: 800;
-            line-height: 1.1;
-        }
+    letter-spacing: -10px;
 
-        .quote span {
-            color: #ff3030;
-        }
+    font-weight: 900;
 
-        .about-text {
-            color: #999;
-            font-size: 1.05rem;
-        }
+    margin-bottom: 45px;
+}
 
-        /* =========================
-           FOOTER
-        ========================== */
+.hero h1 span {
+    color: #ff2020;
+}
 
-        footer {
-            padding: 40px 8%;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex;
-            justify-content: space-between;
-            color: #666;
-            font-size: 0.9rem;
-        }
+.hero-description {
+    max-width: 650px;
 
-        /* =========================
-           ANIMATION
-        ========================== */
+    color: #999;
 
-        .fade {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 1s ease forwards;
-        }
+    font-size: 1.15rem;
 
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    line-height: 1.8;
 
-        /* =========================
-           MOBILE
-        ========================== */
+    margin-bottom: 40px;
+}
 
-        @media (max-width: 800px) {
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
 
-            nav {
-                padding: 18px 6%;
-            }
+.btn {
+    padding: 15px 25px;
 
-            nav ul {
-                display: none;
-            }
+    border-radius: 6px;
 
-            .hero {
-                padding-left: 6%;
-                padding-right: 6%;
-            }
+    border: 1px solid #333;
 
-            section {
-                padding-left: 6%;
-                padding-right: 6%;
-            }
+    font-weight: bold;
 
-            .cards {
-                grid-template-columns: 1fr;
-            }
+    transition: 0.3s;
+}
 
-            .about {
-                grid-template-columns: 1fr;
-                gap: 35px;
-            }
+.btn-primary {
+    background: #ff2020;
+    border-color: #ff2020;
+}
 
-            footer {
-                flex-direction: column;
-                gap: 10px;
-            }
+.btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(255,0,0,0.25);
+}
 
-            h1 {
-                letter-spacing: -3px;
-            }
-        }
-    </style>
+.btn-outline {
+    color: #aaa;
+}
+
+.btn-outline:hover {
+    color: white;
+    border-color: #777;
+}
+
+
+/* =========================================================
+   HUGE 7
+========================================================= */
+
+.giant-seven {
+    position: absolute;
+
+    right: 5%;
+    bottom: 0;
+
+    font-size: min(55vw, 700px);
+
+    font-weight: 900;
+
+    line-height: 0.7;
+
+    color: transparent;
+
+    -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+
+    user-select: none;
+
+    z-index: -1;
+}
+
+
+/* =========================================================
+   SCROLL INDICATOR
+========================================================= */
+
+.scroll {
+    position: absolute;
+
+    bottom: 30px;
+    left: 7%;
+
+    color: #555;
+
+    font-size: 0.7rem;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+}
+
+.scroll::after {
+    content: "";
+
+    display: block;
+
+    width: 1px;
+    height: 50px;
+
+    background: #ff2020;
+
+    margin-top: 12px;
+}
+
+
+/* =========================================================
+   GENERAL SECTION
+========================================================= */
+
+section {
+    padding: 130px 7%;
+}
+
+.section-label {
+    color: #ff2020;
+
+    font-size: 0.7rem;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+
+    letter-spacing: -3px;
+
+    line-height: 1;
+}
+
+.section-description {
+    color: #777;
+
+    max-width: 650px;
+
+    margin-top: 25px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   IDENTITY
+========================================================= */
+
+.identity {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 80px;
+
+    align-items: center;
+}
+
+.identity-big {
+    font-size: clamp(3rem, 6vw, 6rem);
+
+    font-weight: 900;
+
+    line-height: 0.95;
+
+    letter-spacing: -4px;
+}
+
+.identity-big span {
+    color: #ff2020;
+}
+
+.identity-text {
+    color: #999;
+
+    line-height: 1.9;
+
+    font-size: 1.05rem;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.cards {
+    margin-top: 70px;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.card {
+    min-height: 260px;
+
+    padding: 30px;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    background: rgba(255,255,255,0.025);
+
+    position: relative;
+
+    overflow: hidden;
+
+    transition: 0.4s;
+}
+
+.card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 120px;
+    height: 120px;
+
+    border-radius: 50%;
+
+    background: rgba(255,0,0,0.08);
+
+    filter: blur(40px);
+
+    right: -50px;
+    bottom: -50px;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+
+    border-color: rgba(255,0,0,0.35);
+}
+
+.card-number {
+    color: #ff2020;
+
+    font-size: 0.7rem;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 60px;
+}
+
+.card h3 {
+    font-size: 1.7rem;
+
+    margin-bottom: 15px;
+}
+
+.card p {
+    color: #777;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   PHILOSOPHY
+========================================================= */
+
+.philosophy {
+    min-height: 70vh;
+
+    display: flex;
+
+    align-items: center;
+}
+
+.quote {
+    max-width: 1100px;
+
+    font-size: clamp(3rem, 7vw, 7rem);
+
+    font-weight: 900;
+
+    line-height: 0.95;
+
+    letter-spacing: -5px;
+}
+
+.quote span {
+    color: #ff2020;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+}
+
+.stat {
+    padding: 45px 25px;
+
+    border-right: 1px solid #222;
+}
+
+.stat:last-child {
+    border-right: none;
+}
+
+.stat-number {
+    font-size: 3rem;
+
+    font-weight: 900;
+
+    color: #ff2020;
+
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    color: #666;
+
+    font-size: 0.8rem;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   FINAL CTA
+========================================================= */
+
+.final {
+    min-height: 80vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+.final h2 {
+    font-size: clamp(3.5rem, 9vw, 9rem);
+
+    line-height: 0.85;
+
+    letter-spacing: -7px;
+
+    font-weight: 900;
+
+    margin-bottom: 40px;
+}
+
+.final h2 span {
+    color: #ff2020;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    padding: 40px 7%;
+
+    border-top: 1px solid #1a1a1a;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: #555;
+
+    font-size: 0.75rem;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+.reveal {
+    opacity: 0;
+
+    transform: translateY(35px);
+
+    animation: reveal 1s ease forwards;
+}
+
+.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.delay-2 {
+    animation-delay: 0.4s;
+}
+
+.delay-3 {
+    animation-delay: 0.6s;
+}
+
+@keyframes reveal {
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    nav {
+        padding: 20px 6%;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+
+    .hero h1 {
+        letter-spacing: -5px;
+    }
+
+    .giant-seven {
+        right: -15%;
+        opacity: 0.6;
+    }
+
+    section {
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+
+    .identity {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .stat {
+        border-right: none;
+        border-bottom: 1px solid #222;
+    }
+
+    .stat:last-child {
+        border-bottom: none;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
-    <!-- =========================
-         NAVIGATION
-    ========================== -->
+<!-- BACKGROUND -->
 
-    <nav>
-        <a href="#" class="logo">SE<span>7</span>EN</a>
-
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+<div class="grid"></div>
+<div class="atmosphere"></div>
+<div class="cursor-glow" id="glow"></div>
 
 
-    <!-- =========================
-         HERO
-    ========================== -->
+<!-- NAVIGATION -->
 
-    <main>
+<nav>
 
-        <section class="hero">
+    <a href="#" class="logo">
+        SE<span>7</span>EN
+    </a>
 
-            <div class="hero-content fade">
+    <div class="nav-links">
 
-                <div class="tag">
-                    EXPLORING • LEARNING • BUILDING
-                </div>
+        <a href="#about">ABOUT</a>
+        <a href="#explore">EXPLORE</a>
+        <a href="#mindset">MINDSET</a>
 
-                <h1>
-                    THINK.<br>
-                    BUILD.<br>
-                    <span>CREATE.</span>
-                </h1>
+    </div>
 
-                <p>
-                    Welcome to my corner of the internet.
-                    A place where ideas become experiments,
-                    curiosity becomes knowledge, and projects
-                    become something real.
-                </p>
-
-                <div class="buttons">
-                    <a href="#projects" class="btn btn-primary">
-                        Explore Projects
-                    </a>
-
-                    <a href="#about" class="btn btn-secondary">
-                        About Me
-                    </a>
-                </div>
-
-            </div>
-
-        </section>
+</nav>
 
 
-        <!-- =========================
-             ABOUT
-        ========================== -->
+<!-- HERO -->
 
-        <section id="about">
+<section class="hero">
 
-            <div class="about">
+    <div class="hero-content">
 
-                <div>
-                    <div class="quote">
-                        The world is <span>huge.</span><br>
-                        So keep exploring.
-                    </div>
-                </div>
+        <div class="small-title reveal">
+            WELCOME TO MY WORLD
+        </div>
 
-                <div class="about-text">
-                    <p>
-                        I'm someone who enjoys learning how things work,
-                        experimenting with technology, exploring science,
-                        and turning random ideas into projects.
-                    </p>
+        <h1 class="reveal delay-1">
+            I'M<br>
+            <span>SEVEN.</span>
+        </h1>
 
-                    <br>
+        <p class="hero-description reveal delay-2">
 
-                    <p>
-                        This website is a small record of that journey.
-                        It will probably change a lot over time.
-                    </p>
-                </div>
+            Curious by nature.
+            Obsessed with learning.
+            Fascinated by science, technology,
+            the universe, and the endless possibility
+            of what humans can create.
 
-            </div>
+        </p>
 
-        </section>
+        <div class="hero-buttons reveal delay-3">
 
-
-        <!-- =========================
-             PROJECTS
-        ========================== -->
-
-        <section id="projects">
-
-            <h2 class="section-title">
-                Projects
-            </h2>
-
-            <p class="section-description">
-                Things I've built, explored, or experimented with.
-            </p>
-
-            <div class="cards">
-
-                <article class="card">
-
-                    <div class="card-number">
-                        01 / WEB
-                    </div>
-
-                    <h3>
-                        First Website
-                    </h3>
-
-                    <p>
-                        My first step into web development.
-                        Built with HTML, CSS and curiosity.
-                    </p>
-
-                </article>
-
-
-                <article class="card">
-
-                    <div class="card-number">
-                        02 / SCIENCE
-                    </div>
-
-                    <h3>
-                        Astronomy
-                    </h3>
-
-                    <p>
-                        Exploring stars, physics, luminosity,
-                        and the strange universe above us.
-                    </p>
-
-                </article>
-
-
-                <article class="card">
-
-                    <div class="card-number">
-                        03 / FUTURE
-                    </div>
-
-                    <h3>
-                        More Coming
-                    </h3>
-
-                    <p>
-                        This space is reserved for whatever
-                        ridiculous idea comes next.
-                    </p>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             CONTACT
-        ========================== -->
-
-        <section id="contact">
-
-            <h2 class="section-title">
-                Keep Exploring.
-            </h2>
-
-            <p class="section-description">
-                This website is only the beginning.
-            </p>
-
-            <a href="#"
-               class="btn btn-primary"
-               onclick="showMessage()">
-                Press Me
+            <a href="#about" class="btn btn-primary">
+                ENTER
             </a>
 
-        </section>
+            <a href="#explore" class="btn btn-outline">
+                EXPLORE
+            </a>
 
-    </main>
-
-
-    <!-- =========================
-         FOOTER
-    ========================== -->
-
-    <footer>
-
-        <div>
-            © 2026 Seven
         </div>
 
+    </div>
+
+
+    <div class="giant-seven">
+        7
+    </div>
+
+
+    <div class="scroll">
+        SCROLL TO EXPLORE
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section id="about">
+
+    <div class="section-label">
+        01 / IDENTITY
+    </div>
+
+    <div class="identity">
+
         <div>
-            Built from scratch.
+
+            <div class="identity-big">
+                NOT HERE<br>
+                TO <span>BLEND IN.</span>
+            </div>
+
         </div>
 
-    </footer>
+        <div class="identity-text">
+
+            <p>
+                I'm Seven.
+            </p>
+
+            <br>
+
+            <p>
+                I like understanding things.
+                Not just knowing the answer,
+                but asking why the answer exists
+                in the first place.
+            </p>
+
+            <br>
+
+            <p>
+                From astronomy and physics
+                to programming and creative projects,
+                this website is a small record
+                of the things I discover along the way.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
 
 
-    <!-- =========================
-         JAVASCRIPT
-    ========================== -->
+<!-- EXPLORE -->
 
-    <script>
+<section id="explore">
 
-        function showMessage() {
-            alert(
-                "You found the button. Congratulations, human."
-            );
-        }
+    <div class="section-label">
+        02 / INTERESTS
+    </div>
 
-    </script>
+    <h2 class="section-title">
+        THINGS<br>
+        WORTH EXPLORING.
+    </h2>
+
+    <p class="section-description">
+        Curiosity rarely stays inside one box.
+        Mine certainly doesn't.
+    </p>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <div class="card-number">
+                01 / SCIENCE
+            </div>
+
+            <h3>
+                Astronomy
+            </h3>
+
+            <p>
+                Stars, galaxies, luminosity,
+                physics, and the strange universe
+                waiting beyond Earth.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">
+                02 / TECHNOLOGY
+            </div>
+
+            <h3>
+                Programming
+            </h3>
+
+            <p>
+                Turning ideas into systems,
+                websites, experiments,
+                and things people can actually use.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">
+                03 / CREATIVE
+            </div>
+
+            <h3>
+                Projects
+            </h3>
+
+            <p>
+                Designing, experimenting,
+                creating worlds, and occasionally
+                doing something completely ridiculous.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- PHILOSOPHY -->
+
+<section class="philosophy" id="mindset">
+
+    <div>
+
+        <div class="section-label">
+            03 / MINDSET
+        </div>
+
+        <div class="quote">
+
+            WE MAY NOT KNOW<br>
+            HOW FAR WE CAN GO.<br>
+
+            <span>
+                SO WE KEEP GOING.
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STATS -->
+
+<section>
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-number">
+                07
+            </div>
+
+            <div class="stat-label">
+                The Number
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-number">
+                ∞
+            </div>
+
+            <div class="stat-label">
+                Things To Learn
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-number">
+                01
+            </div>
+
+            <div class="stat-label">
+                Journey
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FINAL -->
+
+<section class="final">
+
+    <div>
+
+        <div class="section-label">
+            THIS IS ONLY THE BEGINNING
+        </div>
+
+        <h2>
+            KEEP<br>
+            <span>GOING.</span>
+        </h2>
+
+        <a href="#" class="btn btn-primary">
+            BACK TO TOP
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div>
+        © 2026 SEVEN
+    </div>
+
+    <div>
+        BUILT WITH CURIOSITY.
+    </div>
+
+</footer>
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+const glow = document.getElementById("glow");
+
+document.addEventListener("mousemove", (event) => {
+
+    glow.style.left = event.clientX + "px";
+    glow.style.top = event.clientY + "px";
+
+});
+
+
+/* Small parallax effect */
+
+const giantSeven = document.querySelector(".giant-seven");
+
+window.addEventListener("scroll", () => {
+
+    const scroll = window.scrollY;
+
+    giantSeven.style.transform =
+        `translateY(${scroll * 0.15}px)`;
+
+});
+
+
+</script>
 
 </body>
-    </html>
+        </html>
